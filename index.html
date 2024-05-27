@@ -4,25 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <div class="navbar">
-    /*display time */
+        <!-- Konten navbar seperti tampilan waktu, login, tautan sign up -->
     </div>
     <div class="dashboard">
-        <div class="upper half">
-            <div class="map">/*diplay map and pin points*/</div>
-            <div class="detail">/*display details of the pin points*/</div>
+        <div class="upper-half">
+            <div id="map" class="map">Map will be here</div>
+            <div id="pin-details" class="detail">Details of the pin points</div>
         </div>
-        <div class="second half">
-            <div class="grafik">/*display floodgate height*/</div>
-            <div class="weather x status">
-                <div class="forecast">/*dsiplay weather forecast*/</div>
-                <div class="status">/*planning on progress, display the status either floodgate or the water pump*/</div>
+        <div class="second-half">
+            <div class="pintu-air-selector">
+                <label for="pintu-air">Pintu Air:</label>
+                <select id="pintu-air">
+                    <option value="Bendung Katulampa">Bendung Katulampa</option>
+                    <option value="Pos Depok">Pos Depok</option>
+                    <!-- Tambahkan opsi lainnya di sini -->
+                </select>
+            </div>
+            <div id="graph" class="grafik">
+                <img id="floodgate-graph" src="" alt="Floodgate Graph">
+            </div>
+            <div class="weather-x-status">
+                <div id="forecast" class="forecast">Weather forecast will be here</div>
+                <div id="status" class="status">Floodgate and pump status</div>
+            </div>
+            <div id="floodgate-table" class="floodgate-table">
+                <!-- Tabel ketinggian pintu air akan di-insert secara dinamis disini -->
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

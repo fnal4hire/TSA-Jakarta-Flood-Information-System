@@ -1,36 +1,39 @@
+import csv
 import requests
 from bs4 import BeautifulSoup as bs
-import schedule
-import time
-import csv
+import re
 
 def scrape_floodgate_data():
-    url='https://bpbd.jakarta.go.id/waterlevel'
-    page= requests.get(url)
-    soup=bs(page.text,'html')
-    table=soup.find('table')
-    #loads the raw table with html tags
-    with open('floodgate_data.html', 'w') as file:
-        file.write(str(table))
-    #The table html code will later be loaded to front end
-    headers = []
-    rows = []
-    for header in table.find_all('tr')[1].find_all('td')[1:]:  # Skip the first cell which is empty
-        headers.append(header.get_text(strip=True))
+    url = 'https://bpbd.jakarta.go.id/waterlevel'
+    page = requests.get(url)
+    soup = bs(page.text, 'html.parser')
+    
+    table = soup.find('table')
+    
+    # Save the raw HTML table
+    with open('floodgate_data.html', 'w', encoding='utf-8') as f:
+        f.write(str(table))
+    
+    data = []
+    for row in table.find_all('tr'):
+        row_data = []
+        for cell in row.find_all(['th', 'td']):
+            cell_text = cell.text.strip().replace('\xa0', ' ')
+            row_data.append(cell_text)
+        data.append(row_data)
+    
+    # Save clean data to CSV for each floodgate
+    headers = data[0][1:-1]  # Skip 'Pintu Air' and last empty header
+    for row in data[1:]:
+        floodgate_name = row[0].strip()
+        levels = [re.findall(r'\d+', level)[0] if level else '0' for level in row[1:-1]]  # Extract numbers
+        
+        filename = f'{floodgate_name.replace(" ", "_")}.csv'
+        with open(filename, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Time', 'Water Level (cm)'])
+            for i, level in enumerate(levels):
+                writer.writerow([headers[i], level])
 
-    for row in table.find_all('tr')[2:]:  # Skip the header rows
-        cells = row.find_all('td')
-        if len(cells) > 1:
-            row_data = [cell.get_text(strip=True).replace('\xa0', ' ') for cell in cells[1:]]  # Skip the first cell
-            rows.append(row_data)
-    #csv is needed to make graphs for the floodgate height
-    with open('floodgate_data.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(headers)
-        writer.writerows(rows)
-schedule.every(1).hours.do(scrape_floodgate_data)
 if __name__ == "__main__":
-    scrape_floodgate_data()  # Initial run
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    scrape_floodgate_data()
