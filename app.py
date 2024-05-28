@@ -34,13 +34,13 @@ def scheduler():
 
 def create_graph(pintu_air):
     #search for file
-    file= os.path.join('.\csv', f'{pintu_air.replace(" ","_")}.csv')
+    file= "./csv/" + pintu_air.replace(' ','_') + ".csv"
     #if exist do
     if os.path.exists(file):
         #read file
         df=pd.read_csv(file)
         times=df["Time"]
-        levels=df["water Level (cm)"].astype(int)
+        levels=df["Water Level (cm)"].astype(int)
         #plotting
         plt.figure(figsize=(10,5))
         plt.plot(times, levels, marker='o')
@@ -50,7 +50,7 @@ def create_graph(pintu_air):
         #save plot
         dir='.\graph'
         os.makedirs(dir, exist_ok=True)
-        gpath=os.path.join(dir,f"{pintu_air.replace(" ","_")}.png")
+        gpath=os.path.join(dir,f"{pintu_air.replace(' ','_')}.png")
         plt.savefig(gpath, format='png')
         plt.close()
         return gpath

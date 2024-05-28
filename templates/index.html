@@ -42,6 +42,26 @@
             </div>
             <div id="floodgate-table" class="floodgate-table">
                 <!-- Tabel ketinggian pintu air akan di-insert secara dinamis disini -->
+                <table>
+                    <thead>
+                        <tr>
+                            <td>{{table[0].nama}}</td>
+                            {%for item in table[0].data%}
+                            <td>{{item}}</td>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for isi in table[1:] %}
+                        <tr>
+                            <td>{{isi.nama}}</td>
+                            {% for item in isi.data %}
+                            <td>{{item}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

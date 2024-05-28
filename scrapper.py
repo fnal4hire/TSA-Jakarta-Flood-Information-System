@@ -53,7 +53,7 @@ def scrape_floodgate_data():
         floodgate_name = row[0].strip()
         levels = [re.findall(r'\d+', level)[0] if level else '0' for level in row[1:-1]]  # Extract numbers
         
-        filename = f'{floodgate_name.replace(" ", "_")}.csv'
+        filename = floodgate_name.replace(' ','_')+'.csv'
         filepath= os.path.join(directory, filename)  # Construct the file path
         with open(filepath, mode='w', newline='') as file:
             writer = csv.writer(file)
