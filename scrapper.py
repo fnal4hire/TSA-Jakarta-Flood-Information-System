@@ -15,7 +15,13 @@ def scrape_floodgate_data():
     with open('floodgate_data.html', 'w', encoding='utf-8') as f:
         f.write(str(table))
     
+    # Extract headers from the second row within the <thead> tag
+    headers_row = table.find('thead').find_all('tr')[1]  # Get the second row within the <thead> tag
+    headers = [header.text.strip() for header in headers_row.find_all('td')[1:-1]]  # Extract header texts, skipping the first and last cells
+
     data = []
+    dict_list=[]
+
     for row in table.find_all('tr'):
         row_data = []
         for cell in row.find_all(['th', 'td']):
@@ -23,9 +29,21 @@ def scrape_floodgate_data():
             row_data.append(cell_text)
         data.append(row_data)
     
-    # Extract headers from the second row within the <thead> tag
-    headers_row = table.find('thead').find_all('tr')[1]  # Get the second row within the <thead> tag
-    headers = [header.text.strip() for header in headers_row.find_all('td')[1:-1]]  # Extract header texts, skipping the first and last cells
+     # Create the list of dictionaries
+    for row in data[1:]:  # Skip the header row
+        row_dict = {}
+        row_dict["nama"] = row[0].strip().replace('\xa0', ' ')  # First cell is the floodgate name
+        data_values = [cell.strip().replace('\xa0', ' ') for cell in row[1:len(headers)+1]]  # Extract data values matching the number of headers
+        
+        # Ensure the data_values length matches headers length
+        if len(data_values) < len(headers):
+            data_values.extend([''] * (len(headers) - len(data_values)))  # Pad with empty strings
+        elif len(data_values) > len(headers):
+            data_values = data_values[:len(headers)]  # Truncate excess values
+        
+        row_dict["data"] = data_values
+        dict_list.append(row_dict)   
+
     directory='.\csv'
     #directory = os.path.join(os.getcwd(), 'csv')
     #os.makedirs(directory, exist_ok=True)
@@ -45,6 +63,6 @@ def scrape_floodgate_data():
                     writer.writerow([headers[i], level])
                 else:
                     print(f"Warning: Header not found for level {level} in {floodgate_name}")
-
+    return dict_list
 if __name__ == "__main__":
     scrape_floodgate_data()
