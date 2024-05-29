@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Document</title>
 </head>
 <body>
     <div class="navbar">
         <!-- Konten navbar seperti tampilan waktu, login, tautan sign up -->
     </div>
-    <div class="dashboard">
+    <div class="dashboard" data-graph-url="{{ url_for('static', filename='graph') }}">
         <div class="upper-half">
             <div id="map" class="map">Map will be here</div>
             <div id="pin-details" class="detail">Details of the pin points</div>
@@ -21,8 +21,8 @@
                 <select id="pintu-air" onchange="updatePintuAir">
                     <option value="Bendung Katulampa">Bendung Katulampa</option>
                     <option value="Pos Depok">Pos Depok</option>
-                    <option value="PA Karet">PA Karet</option>
-                    <option value="Mangarai BKB">Mangarai BKB</option>
+                    <option value="PA. Karet">PA Karet</option>
+                    <option value="Manggarai BKB">Mangarai BKB</option>
                     <option value="Pasar Ikan - Laut">Pasar Ikan - Laut</option>
                     <option value="Pos Angke Hulu">Pos Angke Hulu</option>
                     <option value="Pos Cipinang Hulu">Pos Cipinang Hulu</option>
@@ -66,6 +66,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="{{ url_for('static',filename='script.js') }}"> </script>
 </body>
 </html>

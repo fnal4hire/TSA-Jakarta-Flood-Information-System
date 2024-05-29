@@ -5,11 +5,12 @@ import threading
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import urllib.parse
 from scrapper import scrape_floodgate_data  # Sesuaikan nama file jika berbeda
 
 app= Flask(__name__)
 #default floodgate_value
-floodgate=[ "Bendung Katulampa","Pos Depok","PA Karet","Mangarai BKB","Pasar Ikan - Laut","Pos Angke Hulu","Pos Cipinang Hulu","Pos Krukut Hulu","Pos Pesanggrahan","Pos Sunter Hulu","Pulo Gadung","Waduk Pluit"]
+floodgate=[ "Bendung Katulampa","Pos Depok","PA. Karet","Manggarai BKB","Pasar Ikan - Laut","Pos Angke Hulu","Pos Cipinang Hulu","Pos Krukut Hulu","Pos Pesanggrahan","Pos Sunter Hulu","Pulo Gadung","Waduk Pluit"]
 @app.route('/')
 def index():
     #graph
@@ -49,6 +50,7 @@ def create_graph():
             dir='.\graph'
             os.makedirs(dir, exist_ok=True)
             gpath=os.path.join(dir,f"{item.replace(' ','_')}.png")
+            gpath=urllib.parse.unquote(gpath)
             plt.savefig(gpath, format='png')
             plt.close()
     return None
