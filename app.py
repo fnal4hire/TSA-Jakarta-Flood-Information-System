@@ -39,6 +39,7 @@ def create_graph():
         #read file
             df=pd.read_csv(file)
             times=df["Time"]
+            times=times[::-1]
             levels=df["Water Level (cm)"].astype(int)
         #plotting
             plt.figure(figsize=(10,5))
