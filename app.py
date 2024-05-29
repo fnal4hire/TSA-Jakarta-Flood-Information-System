@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import schedule
 import time
 import threading
@@ -9,21 +9,17 @@ from scrapper import scrape_floodgate_data  # Sesuaikan nama file jika berbeda
 
 app= Flask(__name__)
 #default floodgate_value
-pintu_air="Bendung Katulampa"
+floodgate=[ "Bendung Katulampa","Pos Depok","PA Karet","Mangarai BKB","Pasar Ikan - Laut","Pos Angke Hulu","Pos Cipinang Hulu","Pos Krukut Hulu","Pos Pesanggrahan","Pos Sunter Hulu","Pulo Gadung","Waduk Pluit"]
 @app.route('/')
 def index():
-    global pintu_air
-    if request.method=='POST':
-        pintu_air=request.form['pintu_air']
     #graph
-    graph=create_graph(pintu_air)
+    create_graph()
     #table
     dict_list=scrape_floodgate_data()
-    return render_template('index.html',table=dict_list, plot_path=graph)
+    return render_template('index.html',table=dict_list)
 
 def scrape_and_update():
-    global pintu_air
-    create_graph(pintu_air)
+    create_graph()
     scrape_floodgate_data()
 
 def scheduler():
@@ -32,28 +28,29 @@ def scheduler():
         schedule.run_pending()
         time.sleep(1)
 
-def create_graph(pintu_air):
+def create_graph():
+    global floodgate
+    for item in floodgate:
     #search for file
-    file= "./csv/" + pintu_air.replace(' ','_') + ".csv"
+        file= "./csv/" + item.replace(' ','_') + ".csv"
     #if exist do
-    if os.path.exists(file):
+        if os.path.exists(file):
         #read file
-        df=pd.read_csv(file)
-        times=df["Time"]
-        levels=df["Water Level (cm)"].astype(int)
+            df=pd.read_csv(file)
+            times=df["Time"]
+            levels=df["Water Level (cm)"].astype(int)
         #plotting
-        plt.figure(figsize=(10,5))
-        plt.plot(times, levels, marker='o')
-        plt.suptitle(f"{pintu_air}", fontsize=18)
-        plt.grid(True)
+            plt.figure(figsize=(10,5))
+            plt.plot(times, levels, marker='o')
+            plt.suptitle(f"{item}", fontsize=18)
+            plt.grid(True)
 
         #save plot
-        dir='.\graph'
-        os.makedirs(dir, exist_ok=True)
-        gpath=os.path.join(dir,f"{pintu_air.replace(' ','_')}.png")
-        plt.savefig(gpath, format='png')
-        plt.close()
-        return gpath
+            dir='.\graph'
+            os.makedirs(dir, exist_ok=True)
+            gpath=os.path.join(dir,f"{item.replace(' ','_')}.png")
+            plt.savefig(gpath, format='png')
+            plt.close()
     return None
 if __name__=='__main__':
     scheduler_thread = threading.Thread(target=scheduler)
