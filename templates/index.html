@@ -8,12 +8,26 @@
 </head>
 <body>
     <div class="navbar">
-        <!-- Konten navbar seperti tampilan waktu, login, tautan sign up -->
+        <span id="clock"></span>
     </div>
     <div class="dashboard" data-graph-url="{{ url_for('static', filename='graph') }}">
         <div class="upper-half">
-            <div id="map" class="map">Map will be here</div>
-            <div id="pin-details" class="detail">Details of the pin points</div>
+            <div id="map" class="map">
+                <iframe id="peta" src="https://www.google.com/maps/d/embed?mid=1GGFL4ClVuXvSGfOrLbnaILqJ5GQtVAo&ehbc=2E312F&noprof=1" width="100%" height="100%"></iframe>
+            </div>
+            <div id="weather">
+                <div id="forecast" class="forecast">
+                <h1 id="city">Kota</h1>
+                <h2 id="description">Description</h2>
+                <h3 id="temp"></h3>
+                <div class="minmax">
+                    <p id="min"></p>
+                    <p id="max"></p>
+                </div>
+                <h3 id="humidity"></h3>
+                </div>
+                <div id="5-days" class="5-days"></div>
+            </div>
         </div>
         <div class="second-half">
             <div class="pintu-air-selector">
@@ -35,19 +49,6 @@
             </div>
             <div id="graph" class="grafik">
                 <img id="floodgate-graph" src="" alt="Floodgate Graph">
-            </div>
-            <div class="weather-x-status">
-                <div id="forecast" class="forecast">
-                    <h1 id="city">Kota</h1>
-                    <h2 id="description">Description</h2>
-                    <h3 id="temp"></h3>
-                    <div class="minmax">
-                        <p id="min"></p>
-                        <p id="max"></p>
-                    </div>
-                    <h3 id="humidity"></h3>
-                </div>
-                <div id="status" class="status">Floodgate and pump status</div>
             </div>
             <div id="floodgate-table" class="floodgate-table">
                 <!-- Tabel ketinggian pintu air akan di-insert secara dinamis disini -->

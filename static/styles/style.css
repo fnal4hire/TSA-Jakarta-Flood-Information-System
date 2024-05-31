@@ -1,0 +1,149 @@
+/* styles/style.css */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: right;
+    font-size: 18px;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.upper-half, .second-half {
+    flex: 1;
+    display: flex;
+    margin: 20px;
+}
+
+#map {
+    flex: 2;
+    margin-right: 20px;
+}
+
+#weather {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.forecast {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.forecast h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.forecast h2 {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #666;
+}
+
+.forecast h3 {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.minmax {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+#5-days {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.forecast-item {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.forecast-item h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.forecast-item p {
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+.pintu-air-selector {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.pintu-air-selector label {
+    font-weight: bold;
+}
+
+.pintu-air-selector select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.grafik, .floodgate-table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.grafik img {
+    max-width: 100%;
+    height: auto;
+}
+
+.floodgate-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.floodgate-table th, .floodgate-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.floodgate-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+.floodgate-table td {
+    text-align: right;
+}
+
+#clock {
+    font-weight: bold;
+}
