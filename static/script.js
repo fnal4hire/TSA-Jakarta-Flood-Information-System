@@ -14,6 +14,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to the select element
     document.getElementById("pintu-air").addEventListener("change", updatePintuAir);
 
+    window.updatestat= function(){
+        const grafik=document.getElementById("grafik").value;
+        const Url = document.querySelector('.dashboard').getAttribute('data-graph-url');
+        const graphPath = `${Url}/${grafik.replace(/ /g, '_')}.png`;
+
+        const statgraph=document.getElementById("stat_graph");
+        statgraph.src=graphPath;
+    }
+    document.getElementById("grafik").addEventListener("change", updatestat);
     // Function to fetch and display weather data for Jakarta
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=-6.200000&lon=106.816666&units=metric&appid=ea0b8aae6963a492e37462c3b9c835ce`;
 

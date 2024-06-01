@@ -48,7 +48,7 @@ def create_graph():
             plt.grid(True)
 
         #save plot
-            dir='.\graph'
+            dir='.\static\graph'
             os.makedirs(dir, exist_ok=True)
             gpath=os.path.join(dir,f"{item.replace(' ','_')}.png")
             gpath=urllib.parse.unquote(gpath)

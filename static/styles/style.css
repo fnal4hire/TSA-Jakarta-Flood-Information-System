@@ -1,128 +1,134 @@
-/* styles/style.css */
+/* style.css */
 
-/* General styles */
-body {
-    font-family: Arial, sans-serif;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #f4f4f4;
     color: #333;
 }
 
+/* Navbar */
 .navbar {
     background-color: #333;
-    color: #fff;
-    padding: 10px;
+    color: white;
+    padding: 10px 20px;
     text-align: right;
     font-size: 18px;
 }
 
+#clock {
+    float: right;
+}
+
+/* Dashboard Layout */
 .dashboard {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-}
-
-.upper-half, .second-half {
-    flex: 1;
-    display: flex;
     margin: 20px;
 }
 
-#map {
-    flex: 2;
-    margin-right: 20px;
-}
-
-#weather {
-    flex: 1;
+.upper-half, .second-half {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.forecast {
-    text-align: center;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.forecast h1 {
-    margin: 0;
-    font-size: 24px;
+/* Map */
+.map {
+    flex: 1;
+    margin-right: 20px;
 }
 
-.forecast h2 {
-    margin: 5px 0;
-    font-size: 20px;
-    color: #666;
+#peta {
+    border: none;
+    width: 100%;
+    height: 100%;
 }
 
-.forecast h3 {
-    margin: 5px 0;
-    font-size: 18px;
-    color: #333;
+/* Weather */
+#weather {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.forecast h1, .forecast h2, .forecast h3 {
+    margin-bottom: 10px;
 }
 
 .minmax {
     display: flex;
-    justify-content: space-around;
-    margin: 10px 0;
+    justify-content: space-between;
 }
 
-#5-days {
+/* Second Half */
+.second-half {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
-.forecast-item {
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: left;
-}
-
-.forecast-item h3 {
-    margin: 0 0 5px 0;
-    font-size: 16px;
-}
-
-.forecast-item p {
-    margin: 3px 0;
-    font-size: 14px;
-}
-
-.pintu-air-selector {
-    padding: 20px;
+.pintu-air-selector, .statistics, .floodgate-table {
     background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
 }
 
-.pintu-air-selector label {
+.pintu-air-selector label, .statistics label {
+    display: block;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
-.pintu-air-selector select {
-    padding: 5px;
-    font-size: 16px;
+.pintu-air-selector select, .statistics select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
 }
 
-.grafik, .floodgate-table {
-    flex: 1;
+/* Pintu Air Graph */
+.grafik {
+    width: 100%;
+    height: 400px;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
 }
 
 .grafik img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Statistics Graph */
+.stats {
+    text-align: center;
+}
+
+.stats img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Floodgate Table */
+.floodgate-table {
+    overflow-x: auto;
 }
 
 .floodgate-table table {
@@ -131,19 +137,69 @@ body {
 }
 
 .floodgate-table th, .floodgate-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
 }
 
 .floodgate-table th {
     background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.floodgate-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Specific styles for the dropdown and graphs */
+#graph, #stats {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#grafik {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pintu-air, #grafik {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#grafik img, #stat_graph {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Ensure the dropdown and graph are well-aligned */
+.statistics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.statistics label {
+    width: 100%;
     text-align: left;
 }
 
-.floodgate-table td {
-    text-align: right;
+.statistics select {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-#clock {
-    font-weight: bold;
+.statistics img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
 }

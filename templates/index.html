@@ -50,6 +50,18 @@
                     <img id="floodgate-graph" src="" alt="Floodgate Graph">
                 </div>
             </div>
+            <div class="statistics">
+                <label for="grafik">grafik:</label>
+                <select id="grafik" onchange="updatestat">
+                    <option value="top_3_kecamatan">Top 3 kecamatan setiap wilayah</option>
+                    <option value="jumlah_banjir_kota">Jumlah banjir setiap kota</option>
+                    <option value="top_10_kecamatan"> 10 kecamatan tertinggi</option>
+                    <option value="top_10_kelurahan">10 kelurahan tertinggi</option>
+                </select>
+                <div id="stats">
+                    <img id="stat_graph" src="" alt="">
+                </div>
+            </div>
             <div id="floodgate-table" class="floodgate-table">
                 <!-- Tabel ketinggian pintu air akan di-insert secara dinamis disini -->
                 <table>
